@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Security PA - Bienvenida</title>
+    <!-- Fuente de Google Fonts: Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Incluyendo FontAwesome para los iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fb;
+            color: #333;
+        }
+
+        .header {
+            background-color: #2a3d66;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        .header a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 15px;
+        }
+
+        .welcome-container {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .logo {
+            max-width: 230px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-message h1 {
+            font-size: 36px;
+            color: #2a3d66;
+            margin-bottom: 20px;
+        }
+
+        .welcome-message p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .sections {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            color: #2a3d66;
+        }
+
+        .section:hover {
+            transform: translateY(-10px);
+        }
+
+        .icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            color: #2a3d66;
+        }
+
+        p {
+            font-size: 18px;
+            color: #2a3d66;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        @media (max-width: 768px) {
+            .sections {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sections {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer-text {
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px;
+            color: #666;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra superior con enlaces -->
+    <div class="header">
+        <a href="/index.html">Página principal</a>
+        <a href="/contacto.html">Contacto</a>
+        <a href="/nosotros.html">Sobre nosotros</a>
+    </div>
+
+    <div class="welcome-container">
+        <img src="https://i.ibb.co/zVwXTtj/logo-02.png" alt="Logo Team Security PA" class="logo">
+
+        <div class="welcome-message">
+            <h1>Bienvenido a Team Security PA</h1>
+            <p>Estamos comprometidos con la seguridad y el control. Explora nuestras herramientas a continuación.</p>
+        </div>
+        
+        <div class="sections">
+            <div class="section">
+                <a href="/indicadores.html" target="_blank">
+                    <i class="fas fa-chart-line icon"></i>
+                    <p>Indicadores PA</p>
+                </a>
+            </div>
+            <div class="section">
+                <a href="/alertas.security" target="_blank">
+                    <i class="fas fa-exclamation-circle icon"></i>
+                    <p>Alerta Security PA</p>
+                </a>
+            </div>
+            <div class="section">
+                <a href="https://enlace3.com" target="_blank">
+                    <i class="fas fa-bolt icon"></i>
+                    <p>Flash Report</p>
+                </a>
+            </div>
+            <div class="section">
+                <a href="https://enlace4.com" target="_blank">
+                    <i class="fas fa-tachometer-alt icon"></i>
+                    <p>Dashboard Corporativo</p>
+                </a>
+            </div>
+            <div class="section">
+                <a href="https://enlace5.com" target="_blank">
+                    <i class="fas fa-cogs icon"></i>
+                    <p>Procedimientos</p>
+                </a>
+            </div>
+            <div class="section">
+                <a href="https://enlace6.com" target="_blank">
+                    <i class="fas fa-newspaper icon"></i>
+                    <p>Noticias</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-text">
+        <p>DevelOper: EQ-c</p>
+    </div>
+</body>
+</html>

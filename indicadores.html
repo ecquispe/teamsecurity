@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablero de Indicadores PA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Contenedor para el logo */
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 150px; /* Ajusta el tamaño del logo */
+            height: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: #555;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .filters div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            flex: 1;
+        }
+
+        .filters label {
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .filters select {
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); /* Reducir tamaño mínimo */
+            gap: 10px; /* Espacio entre cuadros */
+            margin-top: 30px;
+        }
+
+        .indicator {
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 12px;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: 80px; /* Altura fija */
+            width: 100%; /* Alinear con el contenedor */
+        }
+
+        .indicator:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .indicator h3 {
+            margin-bottom: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .indicator p {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* Colores cálidos diferenciados */
+        .indicator:nth-child(1) { background-color: #abb2b9; } /* Plomo */
+        .indicator:nth-child(2) { background-color: #abb2b9; } /* Plomo */
+        .indicator:nth-child(3) { background-color: #abb2b9; } /* Plomo */
+        .indicator:nth-child(4) { background-color: #2e86c1; } /* Azul */
+        .indicator:nth-child(5) { background-color: #2e86c1; } /* Azul */
+        .indicator:nth-child(6) { background-color: #2e86c1; } /* Azul */
+        .indicator:nth-child(7) { background-color: #f7dc6f; } /* Naranja */
+        .indicator:nth-child(8) { background-color: #f7dc6f; } /* Naranja */
+        .indicator:nth-child(9) { background-color: #f7dc6f; } /* Naranja */
+        .indicator:nth-child(10) { background-color: #ffcdd2; } /* Rosado */
+        .indicator:nth-child(11) { background-color: #ffcdd2; } /* Rosado */
+        .indicator:nth-child(12) { background-color: #ffcdd2; } /* Rosado */
+
+        /* Ajustes para pantallas pequeñas */
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: repeat(3, 1fr); /* Tres columnas en pantallas pequeñas */
+                gap: 8px;
+            }
+
+            .indicator {
+                height: 70px; /* Reducir más altura en pantallas pequeñas */
+                font-size: 10px;
+            }
+
+            .indicator h3 {
+                font-size: 0.7rem;
+            }
+
+            .indicator p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo en la parte superior -->
+        <div class="logo">
+            <img src="https://i.ibb.co/zVwXTtj/logo-02.png" alt="Logo de la Empresa">
+        </div>
+
+        <h1>Tablero de Indicadores PA</h1>
+
+        <!-- Filtros -->
+        <div class="filters">
+            <div>
+                <label for="year">Año:</label>
+                <select id="year" name="year" onchange="applyFilters()">
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                </select>
+            </div>
+            <div>
+                <label for="month">Mes:</label>
+                <select id="month" name="month" onchange="applyFilters()">
+                    <option value="all">Todos</option>
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+            </div>
+            <div>
+                <label for="mall">Sede:</label>
+                <select id="mall" name="mall" onchange="applyFilters()">
+                     <option value="all">Todos</option>
+                    <option value="mall1">MP Independencia</option>
+                    <option value="mall2">Larcomar</option>
+                    <option value="mall3">MP Ica</option>
+                    <option value="mall4">MP Cajarmarca</option>
+                    <option value="mall5">MP Chimbote</option>
+                    <option value="mall6">MP Barranca</option>
+                    <option value="mall7">MP Chorrillos</option>
+                    <option value="mall8">Parque Pisco</option>
+                    <option value="mall9">MP VES</option>
+                    <option value="mall10">MP VES II</option>
+                    <option value="mall11">MP Huaral</option>
+                    <option value="mall12">Parque Cañete</option>
+                    <option value="mall13">MP Jaén</option>
+                    <option value="mall14">Parque Chincha</option>
+                    <option value="mall15">VM Chorillos</option>
+                    <option value="mall16">VM Colonial</option>
+                    <option value="mall17">VM Malvinas</option>
+                    <option value="mall18">OA Arequipa</option>
+                    <option value="mall19">OA Faucett</option>
+                    <option value="mall20">OA Lurin</option>
+                    <option value="mall21">CC Jesús María</option>
+                </select>
+            </div>
+            <div>
+                <label for="region">Región:</label>
+                <select id="region" name="region" onchange="applyFilters()">
+                    <option value="all">Todos</option>
+                    <option value="north">Lima Norte</option>
+                    <option value="south">Lima Sur</option>
+                    <option value="east">Zona Norte</option>
+                    <option value="west">Zona Sur</option>
+                </select>
+            </div>
+        </div>
+
+
+        <!-- Tablero de indicadores -->
+<div class="dashboard">
+    <div class="indicator" id="hurtosMall">
+        <i class="fas fa-shield-alt" style="font-size: 24px;"></i> <!-- Icono de seguridad -->
+        <h3>Hurtos Mall</h3>
+        <p id="hurtosMallValue">0</p>
+    </div>
+    <div class="indicator" id="hurtosLocatarios">
+        <i class="fas fa-store" style="font-size: 24px;"></i> <!-- Icono de tienda -->
+        <h3>Hurtos Locatarios</h3>
+        <p id="hurtosLocatariosValue">0</p>
+    </div>
+    <div class="indicator" id="intrusiones">
+        <i class="fas fa-user-lock" style="font-size: 24px;"></i> <!-- Icono de intrusión -->
+        <h3>Intrusiones</h3>
+        <p id="intrusionesValue">0</p>
+    </div>
+    <div class="indicator" id="atencionIncidentes">
+        <i class="fas fa-first-aid" style="font-size: 24px;"></i> <!-- Icono de primeros auxilios -->
+        <h3>Atención Incidentes</h3>
+        <p id="atencionIncidentesValue">0</p>
+    </div>
+    <div class="indicator" id="IncidentesenTTVV">
+        <i class="fas fa-tv" style="font-size: 24px;"></i> <!-- Icono de TV -->
+        <h3>Incidentes en TTVV</h3>
+        <p id="IncidentesenTTVVValue">0</p>
+    </div>
+    <div class="indicator" id="AtencionesconTraslado">
+        <i class="fas fa-ambulance" style="font-size: 24px;"></i> <!-- Icono de ambulancia -->
+        <h3>Atenciones con Traslado</h3>
+        <p id="AtencionesconTrasladoValue">0</p>
+    </div>
+    <div class="indicator" id="InterconexiónD&A">
+        <i class="fas fa-link" style="font-size: 24px;"></i> <!-- Icono de enlace -->
+        <h3>Interconexión D&A</h3>
+        <p id="InterconexiónD&AValue">0</p>
+    </div>
+    <div class="indicator" id="OperatividadCCTV">
+        <i class="fas fa-video" style="font-size: 24px;"></i> <!-- Icono de video cámara -->
+        <h3>Operatividad CCTV</h3>
+        <p id="OperatividadCCTVValue">0</p>
+    </div>
+    <div class="indicator" id="DíasdeGrabaciónPromedio">
+        <i class="fas fa-calendar-day" style="font-size: 24px;"></i> <!-- Icono de calendario -->
+        <h3>Días de Grabación Promedio</h3>
+        <p id="DíasdeGrabaciónPromedioValue">0</p>
+    </div>
+    <div class="indicator" id="DDD">
+        <i class="fas fa-calendar-check" style="font-size: 24px;"></i> <!-- Icono de calendario con check -->
+        <h3>DDD</h3>
+        <p id="DDDValue">0</p>
+    </div>
+    <div class="indicator" id="DDS">
+        <i class="fas fa-cogs" style="font-size: 24px;"></i> <!-- Icono de engranaje -->
+        <h3>DDS</h3>
+        <p id="DDSValue">0</p>
+    </div>
+    <div class="indicator" id="HCSecurity">
+        <i class="fas fa-shield-alt" style="font-size: 24px;"></i> <!-- Icono de seguridad -->
+        <h3>HC Security</h3>
+        <p id="HCSecurityValue">0</p>
+    </div>
+</div>
+
+    <script>
+        function updateIndicators() {
+            // Aquí puedes escribir el código que actualiza los indicadores según los filtros seleccionados
+            const sede = document.getElementById('sede').value;
+            const mes = document.getElementById('mes').value;
+            const anio = document.getElementById('anio').value;
+            const region = document.getElementById('region').value;
+
+            // Actualización simulada de valores (puedes conectar a una base de datos)
+            document.getElementById('hurtosMallValue').textContent = `${Math.floor(Math.random() * 10)}`;
+            document.getElementById('hurtosLocatariosValue').textContent = `${Math.floor(Math.random() * 10)}`;
+            document.getElementById('intrusionesValue').textContent = `${Math.floor(Math.random() * 10)}`;
+            document.getElementById('atencionIncidentesValue').textContent = `${Math.floor(Math.random() * 10)}`;
+            document.getElementById('operatividadCCTVValue').textContent = `${Math.floor(Math.random() * 10)}`;
+            document.getElementById('capacitacionPersonalValue').textContent = `${Math.floor(Math.random() * 10)}`;
+            document.getElementById('asistenciaTrabajoValue').textContent = `${Math.floor(Math.random() * 10)}`;
+            document.getElementById('camaraFuncionandoValue').textContent = `${Math.floor(Math.random() * 10)}`;
+            document.getElementById('devolucionesValue').textContent = `${Math.floor(Math.random() * 10)}`;
+        }
+
+        // Inicialización de indicadores
+        updateIndicators();
+    </script>
+</body>
+</html>
